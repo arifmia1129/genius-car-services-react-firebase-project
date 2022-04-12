@@ -8,9 +8,7 @@ const Service = ({ service }) => {
             <h2>{name}</h2>
             <h3>{price}$</h3>
             <p>{description}</p>
-            <div className='btn'>
-                <button>Book now!</button>
-            </div>
+            <button className='btn btn-primary w-100 mt-auto'>Book now!</button>
         </div>
     );
 };

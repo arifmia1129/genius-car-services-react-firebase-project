@@ -2,9 +2,9 @@ import React from 'react';
 
 const Footer = () => {
     return (
-        <div>
+        <div className='text-center mt-5'>
             <p><small>Copyright &copy; {new Date().getFullYear()
-            }</small></p>
+            } The Car Doctor</small></p>
         </div>
     );
 };

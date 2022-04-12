@@ -9,10 +9,3 @@
     width: 100%;
     border-radius: 20px;
 }
-
-.btn button {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-}
