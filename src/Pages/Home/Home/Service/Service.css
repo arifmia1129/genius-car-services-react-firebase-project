@@ -1,9 +1,8 @@
 .service {
     border: 2px solid gray;
-    width: 400px;
-    height: 440px;
     text-align: center;
     border-radius: 20px;
+
 }
 
 .service img {
@@ -16,4 +15,10 @@
     display: flex;
     justify-content: center;
     align-items: flex-end;
+}
+
+@media only screen and (max-width:576px) {
+    .service {
+        margin: 0 20px;
+    }
 }
