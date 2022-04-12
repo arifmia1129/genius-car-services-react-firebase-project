@@ -1,0 +1,19 @@
+.service {
+    border: 2px solid gray;
+    width: 400px;
+    height: 440px;
+    text-align: center;
+    border-radius: 20px;
+}
+
+.service img {
+    width: 100%;
+    border-radius: 20px;
+}
+
+.btn button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}

@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "name": "ENGINE DIAGNOSTIC",
+        "price": "300",
+        "description": "Our engine diagnostic service is best service.",
+        "img": "https://i.ibb.co/dGDkr4v/1.jpg"
+    },
+    {
+        "id": 2,
+        "name": "WHEEL ALIGNMENT",
+        "price": "100",
+        "description": "This is our best service. Because of this is top rated service.",
+        "img": "https://i.ibb.co/tY8dmnP/2.jpg"
+    },
+    {
+        "id": 3,
+        "name": "OIL CHANGING",
+        "price": "150",
+        "description": "You got best oil changing service from us.",
+        "img": "https://i.ibb.co/Yh04YVw/3.jpg"
+    },
+    {
+        "id": 4,
+        "name": "BRAKE REPAIRING",
+        "price": "180",
+        "description": "Brake repairing service is awesome.",
+        "img": "https://i.ibb.co/ZX2Cbkn/4.jpg"
+    },
+    {
+        "id": 5,
+        "name": "WASH AND GLASSING",
+        "price": "100",
+        "description": "You got this service from us with low cost.",
+        "img": "https://i.ibb.co/FgQ3jXp/5.jpg"
+    },
+    {
+        "id": 6,
+        "name": "COMPLETE ANALYSIS",
+        "price": "300",
+        "description": "Complete analysis is top rated, best and awesome service. So try this service with us.",
+        "img": "https://i.ibb.co/zJy5ZDd/6.jpg"
+    }
+]
