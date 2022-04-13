@@ -21,7 +21,7 @@ const Register = () => {
     }
     return (
         <div className=' mx-auto my-2 p-3 form'>
-            <h2 className='text-center text-primary mt-3'>Register Now!</h2>
+            <h2 className='text-center text-danger mt-3'>Register Now!</h2>
             <Form className="border p-3" onSubmit={handleFormSubmit}>
                 <Form.Group className="mb-3" >
                     <Form.Label>Name</Form.Label>
@@ -43,9 +43,9 @@ const Register = () => {
                     <Form.Check type="checkbox" label="Check me out" />
                 </Form.Group>
                 <Button variant="primary" type="submit">
-                    Submit
+                    Register
                 </Button>
-                <p className='mt-3 text-center'>Are you new in The Car Doctor? <button onClick={handleLogin} className='btn text-danger'>Login Now!</button></p>
+                <p className='mt-3 text-center'>Already hava an account in The Car Doctor? <button onClick={handleLogin} className='btn text-danger'>Login Now!</button></p>
             </Form>
         </div>
     );
