@@ -8,6 +8,8 @@ import ServiceDetail from "./Pages/ServiceDetail/ServiceDetail";
 import NotFound from './Pages/NotFound/NotFound';
 import Login from "./Pages/Login/Login";
 import Register from './Pages/Register/Register';
+import RequireAuth from './Pages/Login/RequireAuth';
+import Proceed from './Pages/Proceed/Proceed';
 function App() {
   return (
     <div>
@@ -19,6 +21,11 @@ function App() {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
         <Route path="/service/:serviceId" element={<ServiceDetail />}></Route>
+        <Route path="/proceed" element={
+          <RequireAuth>
+            <Proceed></Proceed>
+          </RequireAuth>
+        }></Route>
         <Route path='*' element={<NotFound></NotFound>}></Route>
       </Routes>
       <Footer></Footer>
