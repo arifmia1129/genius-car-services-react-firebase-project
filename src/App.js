@@ -5,14 +5,19 @@ import Home from "./Pages/Home/Home/Home";
 import Header from "./Pages/Shared/Header/Header";
 import Footer from "./Pages/Shared/Footer/Footer";
 import ServiceDetail from "./Pages/ServiceDetail/ServiceDetail";
+import NotFound from './Pages/NotFound/NotFound';
+import Login from "./Pages/Login/Login";
 function App() {
   return (
     <div>
       <Header></Header>
       <Routes>
         <Route path='/' element={<Home />} />
+        <Route path='/home' element={<Home />} />
         <Route path='/about' element={<About />} />
-        <Route path="service/:serviceId" element={<ServiceDetail />}></Route>
+        <Route path="/login" element={<Login />}></Route>
+        <Route path="/service/:serviceId" element={<ServiceDetail />}></Route>
+        <Route path='*' element={<NotFound></NotFound>}></Route>
       </Routes>
       <Footer></Footer>
     </div>
