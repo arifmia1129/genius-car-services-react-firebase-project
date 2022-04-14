@@ -1,21 +1,22 @@
 import React from 'react';
-import { useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useSignInWithFacebook, useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useLocation, useNavigate } from 'react-router-dom';
 import auth from "../../../firebase.init";
 const SocialLogin = () => {
     const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
     const [signInWithGithub, githubUser, githubLoading, githubError] = useSignInWithGithub(auth);
+    const [signInWithFacebook, fbUser, fbLoading, fbError] = useSignInWithFacebook(auth);
 
     const navigate = useNavigate();
     const location = useLocation();
     let errorMessage;
     const from = location.state?.from?.pathname || "/";
 
-    if (user || githubUser) {
+    if (user || githubUser || fbUser) {
         navigate(from, { replace: true });
     }
-    if (error || githubError) {
-        errorMessage = error?.message || githubError?.message;
+    if (error || githubError || fbError) {
+        errorMessage = error?.message || githubError?.message || fbError?.message;
     }
     return (
         <div>
@@ -37,7 +38,9 @@ const SocialLogin = () => {
                     </button>
                 </div>
                 <div className='text-center'>
-                    <button className='btn btn-outline-secondary my-2'>
+                    <button
+                        onClick={() => signInWithFacebook()}
+                        className='btn btn-outline-secondary my-2'>
                         <img style={{ width: "40px", height: "40px" }} className='me-2 p-2' src="https://upload.wikimedia.org/wikipedia/commons/b/b8/2021_Facebook_icon.svg" alt="" />
                         Sign in with Facebook
                     </button>

@@ -8,6 +8,7 @@ import logo from "../../../images/logo.png";
 const Header = () => {
     const [user] = useAuthState(auth);
     const [githubUser] = useAuthState(auth);
+    const [fbUser] = useAuthState(auth);
     return (
         <Navbar collapseOnSelect sticky='top' expand="lg" bg="dark" variant="dark">
             <Container>
@@ -39,7 +40,11 @@ const Header = () => {
                         }
                     </Nav>
                     {
-                        (user || githubUser) && <p className='text-white mt-3'>{user.email || githubUser.displayName}</p>
+                        (user || githubUser || fbUser) && <p className='text-white mt-3'>{user.email || githubUser.displayName || fbUser.displayName}</p>
+                    }
+
+                    {
+                        fbUser && <img style={{ borderRadius: "50%" }} className='mx-2' src={fbUser.photoURL} alt="" />
                     }
                 </Navbar.Collapse>
             </Container>
