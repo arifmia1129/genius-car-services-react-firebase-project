@@ -7,6 +7,7 @@ import auth from '../../../firebase.init';
 import logo from "../../../images/logo.png";
 const Header = () => {
     const [user] = useAuthState(auth);
+    const [githubUser] = useAuthState(auth);
     return (
         <Navbar collapseOnSelect sticky='top' expand="lg" bg="dark" variant="dark">
             <Container>
@@ -29,7 +30,7 @@ const Header = () => {
                     <Nav>
                         <Nav.Link as={Link} to="about">About</Nav.Link>
                         {
-                            user ?
+                            githubUser || user ?
                                 <button onClick={() => signOut(auth)} className='btn btn-outline text-white'>Sign Out</button>
                                 :
                                 <Nav.Link as={Link} to="login">
@@ -37,6 +38,9 @@ const Header = () => {
                                 </Nav.Link>
                         }
                     </Nav>
+                    {
+                        (user || githubUser) && <p className='text-white mt-3'>{user.email || githubUser.displayName}</p>
+                    }
                 </Navbar.Collapse>
             </Container>
         </Navbar>
