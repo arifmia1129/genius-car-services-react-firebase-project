@@ -2,7 +2,7 @@ import { Button, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
-
+import SocialLogin from "../../Pages/Login/SocialLogin/SocialLogin";
 const Register = () => {
     const [
         createUserWithEmailAndPassword,
@@ -50,6 +50,7 @@ const Register = () => {
                     Register
                 </Button>
                 <p className='mt-3 text-center'>Already hava an account in The Car Doctor? <button onClick={handleLogin} className='btn text-danger'>Login Now!</button></p>
+                <SocialLogin></SocialLogin>
             </Form>
         </div>
     );

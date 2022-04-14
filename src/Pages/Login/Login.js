@@ -4,6 +4,7 @@ import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 import "./Login.css";
+import SocialLogin from './SocialLogin/SocialLogin';
 const Login = () => {
     const [
         signInWithEmailAndPassword,
@@ -51,7 +52,9 @@ const Login = () => {
                     Login
                 </Button>
                 <p className='mt-3 text-center'>Are you new in The Car Doctor? <button onClick={handleNewRegister} className='btn text-danger'>Register now!</button></p>
+                <SocialLogin></SocialLogin>
             </Form>
+
         </div>
     );
 };
