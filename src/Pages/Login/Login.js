@@ -4,8 +4,14 @@ import { Button, Form } from 'react-bootstrap';
 import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
+import Loading from '../Shared/Loading/Loading';
 import "./Login.css";
 import SocialLogin from './SocialLogin/SocialLogin';
+import { ToastContainer, toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
+
+
 const Login = () => {
     const [
         signInWithEmailAndPassword,
@@ -16,6 +22,8 @@ const Login = () => {
     const [sendPasswordResetEmail] = useSendPasswordResetEmail(
         auth
     );
+
+
     const emailRef = useRef("");
     const passwordRef = useRef("");
     const navigate = useNavigate();
@@ -31,8 +39,13 @@ const Login = () => {
         signInWithEmailAndPassword(email, password);
     }
     const resetPassword = async () => {
-        await sendPasswordResetEmail(email);
-        alert('Sent email for reset password!');
+        if (email) {
+            await sendPasswordResetEmail(email);
+            toast('Sent email for reset password!');
+        }
+        else {
+            toast('Enter email then reset request for password');
+        }
     }
     const handleNewRegister = () => {
         navigate("/register");
@@ -40,7 +53,9 @@ const Login = () => {
     if (user) {
         navigate(from, { replace: true });
     }
-
+    if (loading) {
+        return <Loading></Loading>;
+    }
     return (
         <div className=' mx-auto my-2 p-3 form'>
             <h2 className='text-center text-primary mt-3'>Login Now!</h2>
@@ -60,11 +75,14 @@ const Login = () => {
                 <Button className='w-50 mx-auto d-block' variant="primary" type="submit">
                     Login
                 </Button>
-                <p className='mt-3 text-center'>Are you forget password in The Car Doctor? <button onClick={resetPassword} className='btn text-primary'>Reset now</button></p>
-                <p className='mt-3 text-center'>Are you new in The Car Doctor? <button onClick={handleNewRegister} className='btn text-primary'>Register now!</button></p>
-                <p className='text-danger'>{error?.message}</p>
-                <SocialLogin></SocialLogin>
+
             </Form>
+            <p className='mt-3 text-center'>Are you forget password in The Car Doctor? <button onClick={resetPassword} className='btn text-primary'>Reset now</button>
+                <ToastContainer />
+            </p>
+            <p className='mt-3 text-center'>Are you new in The Car Doctor? <button onClick={handleNewRegister} className='btn text-primary'>Register now!</button></p>
+            <p className='text-danger'>{error?.message}</p>
+            <SocialLogin></SocialLogin>
 
         </div>
     );

@@ -4,12 +4,14 @@ import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-fireb
 import auth from '../../firebase.init';
 import SocialLogin from "../../Pages/Login/SocialLogin/SocialLogin";
 import { useState } from 'react';
+import Loading from '../Shared/Loading/Loading';
 
 const Register = () => {
     const [agree, setAgree] = useState(false);
     const [
         createUserWithEmailAndPassword,
         user,
+        loading
     ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
     const [updateProfile] = useUpdateProfile(auth);
 
@@ -34,6 +36,9 @@ const Register = () => {
 
     const handleLogin = () => {
         navigate("/login");
+    }
+    if (loading) {
+        return <Loading></Loading>;
     }
     return (
         <div className=' mx-auto my-2 p-3 form'>
