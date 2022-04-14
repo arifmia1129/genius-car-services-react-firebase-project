@@ -1,21 +1,30 @@
 import { Button, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import SocialLogin from "../../Pages/Login/SocialLogin/SocialLogin";
+import { useState } from 'react';
+
 const Register = () => {
+    const [agree, setAgree] = useState(false);
     const [
         createUserWithEmailAndPassword,
         user,
-    ] = useCreateUserWithEmailAndPassword(auth);
+    ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
+    const [updateProfile] = useUpdateProfile(auth);
+
+    console.log(user);
     const navigate = useNavigate();
-    const handleFormSubmit = event => {
+    const handleFormSubmit = async event => {
         event.preventDefault();
 
         const email = event.target.email.value;
         const password = event.target.password.value;
         const name = event.target.name.value;
-        createUserWithEmailAndPassword(email, password);
+
+        await createUserWithEmailAndPassword(email, password);
+        await updateProfile({ displayName: name });
+        alert('Updated profile');
 
 
     }
@@ -28,7 +37,7 @@ const Register = () => {
     }
     return (
         <div className=' mx-auto my-2 p-3 form'>
-            <h2 className='text-center text-danger mt-3'>Register Now!</h2>
+            <h2 className='text-center text-primary mt-3'>Register Now!</h2>
             <Form className="border p-3" onSubmit={handleFormSubmit}>
                 <Form.Group className="mb-3" >
                     <Form.Label>Name</Form.Label>
@@ -46,10 +55,14 @@ const Register = () => {
                     <Form.Label>Password</Form.Label>
                     <Form.Control name="password" type="password" placeholder="Password" required />
                 </Form.Group>
-                <Button variant="primary" type="submit">
+                <div className='my-3'>
+                    <input onClick={() => setAgree(!agree)} className='ms-3 me-2' type="checkbox" name="terms" id="terms" />
+                    <label className={`fw-bold ${agree ? "text-primary" : "text-danger"}`} htmlFor="terms">Agree with our terms and condition?</label>
+                </div>
+                <Button disabled={!agree} className='w-50 mx-auto d-block' variant="primary" type="submit">
                     Register
                 </Button>
-                <p className='mt-3 text-center'>Already hava an account in The Car Doctor? <button onClick={handleLogin} className='btn text-danger'>Login Now!</button></p>
+                <p className='mt-3 text-center'>Already hava an account in The Car Doctor? <button onClick={handleLogin} className='btn text-primary'>Login Now!</button></p>
                 <SocialLogin></SocialLogin>
             </Form>
         </div>

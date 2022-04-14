@@ -40,11 +40,11 @@ const Header = () => {
                         }
                     </Nav>
                     {
-                        (user || githubUser || fbUser) && <p className='text-white mt-3'>{user.email || githubUser.displayName || fbUser.displayName}</p>
+                        (user || githubUser || fbUser) && <p className='text-white mt-3'>{user?.displayName || githubUser?.displayName || fbUser?.displayName}</p>
                     }
 
                     {
-                        fbUser && <img style={{ borderRadius: "50%" }} className='mx-2' src={fbUser.photoURL} alt="" />
+                        fbUser && <img style={{ borderRadius: "50%", width: "30px", height: "30px" }} className='mx-2' src={fbUser.photoURL} alt="" />
                     }
                 </Navbar.Collapse>
             </Container>

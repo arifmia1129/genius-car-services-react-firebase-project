@@ -1,6 +1,7 @@
+import { async } from '@firebase/util';
 import React, { useRef } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 import "./Login.css";
@@ -9,22 +10,30 @@ const Login = () => {
     const [
         signInWithEmailAndPassword,
         user,
+        loading,
+        error,
     ] = useSignInWithEmailAndPassword(auth);
+    const [sendPasswordResetEmail] = useSendPasswordResetEmail(
+        auth
+    );
     const emailRef = useRef("");
     const passwordRef = useRef("");
     const navigate = useNavigate();
     const location = useLocation();
 
     const from = location.state?.from?.pathname || "/";
-
+    const email = emailRef.current.value;
+    const password = passwordRef.current.value;
     const handleFormSubmit = event => {
         event.preventDefault();
 
-        const email = emailRef.current.value;
-        const password = passwordRef.current.value;
+
         signInWithEmailAndPassword(email, password);
     }
-
+    const resetPassword = async () => {
+        await sendPasswordResetEmail(email);
+        alert('Sent email for reset password!');
+    }
     const handleNewRegister = () => {
         navigate("/register");
     }
@@ -48,10 +57,12 @@ const Login = () => {
                     <Form.Label>Password</Form.Label>
                     <Form.Control ref={passwordRef} type="password" placeholder="Password" required />
                 </Form.Group>
-                <Button variant="primary" type="submit">
+                <Button className='w-50 mx-auto d-block' variant="primary" type="submit">
                     Login
                 </Button>
-                <p className='mt-3 text-center'>Are you new in The Car Doctor? <button onClick={handleNewRegister} className='btn text-danger'>Register now!</button></p>
+                <p className='mt-3 text-center'>Are you forget password in The Car Doctor? <button onClick={resetPassword} className='btn text-primary'>Reset now</button></p>
+                <p className='mt-3 text-center'>Are you new in The Car Doctor? <button onClick={handleNewRegister} className='btn text-primary'>Register now!</button></p>
+                <p className='text-danger'>{error?.message}</p>
                 <SocialLogin></SocialLogin>
             </Form>
 
