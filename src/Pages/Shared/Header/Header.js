@@ -26,6 +26,13 @@ const Header = () => {
                     <Nav>
                         <Nav.Link as={Link} to="about">About</Nav.Link>
                         {
+                            user &&
+
+                            <>
+                                <Nav.Link as={Link} to="manageservice">Manage</Nav.Link> <Nav.Link as={Link} to="addservice">Add</Nav.Link>
+                            </>
+                        }
+                        {
                             (user || githubUser || fbUser) && <p className='text-white mt-3'>{user?.displayName || githubUser?.displayName || fbUser?.displayName}</p>
                         }
 
