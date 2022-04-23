@@ -10,6 +10,7 @@ import SocialLogin from './SocialLogin/SocialLogin';
 import { ToastContainer, toast } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
+import PageTitle from '../Shared/PageTitle/PageTitle';
 
 
 const Login = () => {
@@ -57,7 +58,9 @@ const Login = () => {
         return <Loading></Loading>;
     }
     return (
+
         <div className=' mx-auto my-2 p-3 form'>
+            <PageTitle title="Login"></PageTitle>
             <h2 className='text-center text-primary mt-3'>Login Now!</h2>
             <Form className="border p-3" onSubmit={handleFormSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">

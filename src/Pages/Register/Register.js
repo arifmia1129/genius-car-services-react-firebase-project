@@ -5,6 +5,7 @@ import auth from '../../firebase.init';
 import SocialLogin from "../../Pages/Login/SocialLogin/SocialLogin";
 import { useState } from 'react';
 import Loading from '../Shared/Loading/Loading';
+import PageTitle from '../Shared/PageTitle/PageTitle';
 
 const Register = () => {
     const [agree, setAgree] = useState(false);
@@ -42,6 +43,7 @@ const Register = () => {
     }
     return (
         <div className=' mx-auto my-2 p-3 form'>
+            <PageTitle title="Register"></PageTitle>
             <h2 className='text-center text-primary mt-3'>Register Now!</h2>
             <Form className="border p-3" onSubmit={handleFormSubmit}>
                 <Form.Group className="mb-3" >
