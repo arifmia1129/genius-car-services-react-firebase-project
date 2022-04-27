@@ -16,7 +16,6 @@ const ManageServices = () => {
 
                     setServices(remain);
 
-                    console.log(data)
                 })
         }
     }

@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 
 const AddService = () => {
     const { register, handleSubmit } = useForm();
-    const onSubmit = data => {
+    const onSubmit = (data, event) => {
 
         fetch("https://obscure-shore-20433.herokuapp.com/service", {
             method: "POST",
@@ -14,9 +14,11 @@ const AddService = () => {
         })
 
             .then(res => res.json())
-            .then(result => console.log(result));
+            .then(result => {
+                alert("Service added.");
+                event.target.reset();
+            });
 
-        console.log(data);
     };
     return (
         <div className='container w-50 mx-auto text-center mt-5'>

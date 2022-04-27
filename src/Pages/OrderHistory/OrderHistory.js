@@ -30,11 +30,18 @@ const OrderHistory = () => {
             }
         }
         getOrders();
-    }, [])
+    }, [user])
 
     return (
         <div className='container my-3'>
             <h1>Total Orders : {orders.length}</h1>
+            {
+                orders.map(order => <div className='border border-3 p-3 mb-3 rounded-3' key={order._id}>
+                    <h3>{order.service}</h3>
+                    <p>{order.price}</p>
+                    <p>{order.email}</p>
+                </div>)
+            }
         </div>
     );
 };
