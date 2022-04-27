@@ -16,7 +16,6 @@ const Register = () => {
     ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
     const [updateProfile] = useUpdateProfile(auth);
 
-    console.log(user);
     const navigate = useNavigate();
     const handleFormSubmit = async event => {
         event.preventDefault();

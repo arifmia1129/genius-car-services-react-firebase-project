@@ -7,7 +7,7 @@ const ManageServices = () => {
     const handleDeleteService = (id) => {
         const proceed = window.confirm("Are you sure delete this service?")
         if (proceed) {
-            fetch(`http://localhost:5000/service/${id}`, {
+            fetch(`https://obscure-shore-20433.herokuapp.com/service/${id}`, {
                 method: "DELETE"
             })
                 .then(res => res.json())

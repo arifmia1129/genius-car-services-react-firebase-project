@@ -11,7 +11,7 @@ import { ToastContainer, toast } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
 import PageTitle from '../Shared/PageTitle/PageTitle';
-
+import axios from "axios";
 
 const Login = () => {
     const [
@@ -31,14 +31,24 @@ const Login = () => {
     const location = useLocation();
 
     const from = location.state?.from?.pathname || "/";
-    const email = emailRef.current.value;
-    const password = passwordRef.current.value;
-    const handleFormSubmit = event => {
-        event.preventDefault();
-
-
-        signInWithEmailAndPassword(email, password);
+    const email = emailRef.current?.value;
+    if (user) {
+        // navigate(from, { replace: true });
     }
+    if (loading) {
+        return <Loading></Loading>;
+    }
+    const handleFormSubmit = async event => {
+        event.preventDefault();
+        const address = emailRef.current?.value;
+        const password = passwordRef.current?.value;
+
+        await signInWithEmailAndPassword(address, password);
+        const { data } = await axios.post("https://obscure-shore-20433.herokuapp.com/login", { address })
+        localStorage.setItem("token", data.token);
+        navigate(from, { replace: true });
+    }
+
     const resetPassword = async () => {
         if (email) {
             await sendPasswordResetEmail(email);
@@ -51,12 +61,7 @@ const Login = () => {
     const handleNewRegister = () => {
         navigate("/register");
     }
-    if (user) {
-        navigate(from, { replace: true });
-    }
-    if (loading) {
-        return <Loading></Loading>;
-    }
+
     return (
 
         <div className=' mx-auto my-2 p-3 form'>

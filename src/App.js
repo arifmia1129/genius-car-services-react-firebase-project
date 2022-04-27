@@ -12,6 +12,7 @@ import RequireAuth from './Pages/Login/RequireAuth';
 import Proceed from './Pages/Proceed/Proceed';
 import AddService from './Pages/AddService/AddService';
 import ManageServices from './Pages/ManageServices/ManageServices';
+import OrderHistory from './Pages/OrderHistory/OrderHistory';
 function App() {
   return (
     <div>
@@ -22,8 +23,9 @@ function App() {
         <Route path='/about' element={<About />} />
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
+        <Route path="/orderhistory" element={<OrderHistory />}></Route>
         <Route path="/service/:serviceId" element={<ServiceDetail />}></Route>
-        <Route path="/proceed" element={
+        <Route path="/proceed/:serviceId" element={
           <RequireAuth>
             <Proceed></Proceed>
           </RequireAuth>
