@@ -2,6 +2,7 @@ import React from 'react';
 import { useSignInWithFacebook, useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useLocation, useNavigate } from 'react-router-dom';
 import auth from "../../../firebase.init";
+import useToken from '../../hooks/useToken';
 import Loading from '../../Shared/Loading/Loading';
 const SocialLogin = () => {
     const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
@@ -10,10 +11,11 @@ const SocialLogin = () => {
 
     const navigate = useNavigate();
     const location = useLocation();
+    const [token] = useToken(user || githubUser || fbUser);
     let errorMessage;
     const from = location.state?.from?.pathname || "/";
 
-    if (user || githubUser || fbUser) {
+    if (token) {
         navigate(from, { replace: true });
     }
     if (error || githubError || fbError) {

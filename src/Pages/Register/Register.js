@@ -6,6 +6,7 @@ import SocialLogin from "../../Pages/Login/SocialLogin/SocialLogin";
 import { useState } from 'react';
 import Loading from '../Shared/Loading/Loading';
 import PageTitle from '../Shared/PageTitle/PageTitle';
+import useToken from '../hooks/useToken';
 
 const Register = () => {
     const [agree, setAgree] = useState(false);
@@ -15,7 +16,7 @@ const Register = () => {
         loading
     ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
     const [updateProfile] = useUpdateProfile(auth);
-
+    const [token] = useToken(user);
     const navigate = useNavigate();
     const handleFormSubmit = async event => {
         event.preventDefault();
@@ -30,7 +31,7 @@ const Register = () => {
 
 
     }
-    if (user) {
+    if (token) {
         navigate("/");
     }
 

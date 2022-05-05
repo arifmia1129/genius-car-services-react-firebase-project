@@ -1,4 +1,3 @@
-import { async } from '@firebase/util';
 import React, { useRef } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
@@ -11,8 +10,7 @@ import { ToastContainer, toast } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
 import PageTitle from '../Shared/PageTitle/PageTitle';
-import axios from "axios";
-
+import useToken from "../../Pages/hooks/useToken";
 const Login = () => {
     const [
         signInWithEmailAndPassword,
@@ -32,8 +30,9 @@ const Login = () => {
 
     const from = location.state?.from?.pathname || "/";
     const email = emailRef.current?.value;
-    if (user) {
-        // navigate(from, { replace: true });
+    const [token] = useToken(user);
+    if (token) {
+        navigate(from, { replace: true });
     }
     if (loading) {
         return <Loading></Loading>;
@@ -44,9 +43,7 @@ const Login = () => {
         const password = passwordRef.current?.value;
 
         await signInWithEmailAndPassword(address, password);
-        const { data } = await axios.post("https://obscure-shore-20433.herokuapp.com/login", { address })
-        localStorage.setItem("token", data.token);
-        navigate(from, { replace: true });
+
     }
 
     const resetPassword = async () => {
